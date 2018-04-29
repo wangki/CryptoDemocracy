@@ -1,16 +1,15 @@
 // Import the page's CSS. Webpack will know what to do with it.
-import "../stylesheets/app.css";
+
 
 // Import libraries we need.
 import { default as Web3} from 'web3';
 import { default as contract } from 'truffle-contract'
 
+
 // Import our contract artifacts and turn them into usable abstractions.
-import metacoin_artifacts from '../../build/contracts/MetaCoin.json'
 import betvote_artifacts from '../../build/contracts/Betvote.json'
 
 // MetaCoin is our usable abstraction, which we'll use through the code below.
-const MetaCoin = contract(metacoin_artifacts);
 const Betvote = contract(betvote_artifacts);
 
 // The following code is simple to show off interacting with your contracts.
@@ -19,30 +18,40 @@ const Betvote = contract(betvote_artifacts);
 let accounts;
 let account;
 
+
+
+//---------------------------
+
+
+
+//---------------------------
+
+
+
 window.App = {
   start: function() {
     const self = this;
 
     // Bootstrap the MetaCoin abstraction for Use.
-    MetaCoin.setProvider(web3.currentProvider);
+    //  @todo : delete meta
+    // MetaCoin.setProvider(web3.currentProvider);
     Betvote.setProvider(web3.currentProvider);
 
     // Get the initial account balance so it can be displayed.
     web3.eth.getAccounts(function(err, accs) {
       if (err != null) {
-        alert("There was an error fetching your accounts.");
+        alert("이더리움 계정을 불러오는 과정에서 오류가 발생했습니다.");
         return;
       }
 
       if (accs.length == 0) {
-        alert("Couldn't get any accounts! Make sure your Ethereum client is configured correctly.");
+        alert("이더리움  계정을 불러올 수 없습니다. 메타메스크를 이용해 Rinkeby 네트워크에 접속해주세요. ");
         return;
       }
 
       accounts = accs;
       account = accounts[0];
 
-      self.refreshBalance();
     });
   },
 
@@ -51,44 +60,50 @@ window.App = {
     status.innerHTML = message;
   },
 
-  refreshBalance: function() {
-    let self = this;
+    //  @todo : delete meta
 
-    let meta;
-    MetaCoin.deployed().then(function(instance) {
-      meta = instance;
-      return meta.getBalance.call(account, {from: account});
-    }).then(function(value) {
-      let balance_element = document.getElementById("balance");
-      balance_element.innerHTML = value.valueOf();
-    }).catch(function(e) {
-      console.log(e);
-      self.setStatus("Error getting balance; see log.");
-    });
-  },
+    // refreshBalance: function() {
+    //   let self = this;
+    //
+    //   let meta;
+    //   MetaCoin.deployed().then(function(instance) {
+    //     meta = instance;
+    //     return meta.getBalance.call(account, {from: account});
+    //   }).then(function(value) {
+    //     let balance_element = document.getElementById("balance");
+    //     balance_element.innerHTML = value.valueOf();
+    //   }).catch(function(e) {
+    //     console.log(e);
+    //     self.setStatus("Error getting balance; see log.");
+    //   });
+    // },
+    // sendCoin: function() {
+    //   let self = this;
+    //
+    //   let amount = parseInt(document.getElementById("amount").value);
+    //   let receiver = document.getElementById("receiver").value;
+    //
+    //   this.setStatus("Initiating transaction... (please wait)");
+    //
+    //   let meta;
+    //   MetaCoin.deployed().then(function(instance) {
+    //     meta = instance;
+    //     return meta.sendCoin(receiver, amount, {from: account});
+    //   }).then(function() {
+    //     self.setStatus("Transaction complete!");
+    //     self.refreshBalance();
+    //   }).catch(function(e) {
+    //     console.log(e);
+    //     self.setStatus("Error sending coin; see log.");
+    //   });
+    // },
 
-  sendCoin: function() {
-    let self = this;
+    //  @todo : delete meta
 
-    let amount = parseInt(document.getElementById("amount").value);
-    let receiver = document.getElementById("receiver").value;
 
-    this.setStatus("Initiating transaction... (please wait)");
+    //  @todo : delete test
 
-    let meta;
-    MetaCoin.deployed().then(function(instance) {
-      meta = instance;
-      return meta.sendCoin(receiver, amount, {from: account});
-    }).then(function() {
-      self.setStatus("Transaction complete!");
-      self.refreshBalance();
-    }).catch(function(e) {
-      console.log(e);
-      self.setStatus("Error sending coin; see log.");
-    });
-  },
-
-  fundSetterTest: function() {
+    fundSetterTest: function() {
     let self = this;
     this.setStatus("Initiating transaction... (please wait)");
     let betvote;
@@ -104,9 +119,7 @@ window.App = {
       self.setStatus("fucked up; see log.");
     })
   },
-
-
-  testBetvote: function(amount) {
+    testBetvote: function(amount) {
     let self = this;
 
     // let amount = parseInt(document.getElementById("amount").value);
@@ -124,6 +137,79 @@ window.App = {
     }).then(function() {
       console.log("done")
       self.setStatus("Shit you did it!");
+    }).catch(function(e) {
+      console.log(e);
+      self.setStatus("fucked up; see log.");
+    })
+  },
+    //  @todo : delete test
+
+
+    setWinner: function() {
+    let self = this;
+
+    // let amount = parseInt(document.getElementById("amount").value);
+    // let receiver = document.getElementById("receiver").value;
+    // let amount = 1000000000000;
+
+    this.setStatus("Initiating transaction... (please wait)");
+
+    let betvote;
+    let Winner;
+    Betvote.deployed().then(function(instance) {
+      betvote = instance;
+      console.log("Set winner");
+      Winner = document.getElementById("winner").value;
+
+      return betvote.setWinner(Winner, {from:account});
+    }).then(function(res) {
+        console.log("done");
+        res.logs.map((elem) =>{
+            // setWinnerPrinter (sumTemporaryRatio, tempRatio, amount, Ratio100x)
+            console.log("sumTemporaryRatio");
+            console.log(elem.args.sumTemporaryRatio.toNumber());
+            console.log("Ratio100x");
+            console.log(elem.args.Ratio100x.toNumber());
+            console.log("tempRatio");
+            console.log(elem.args.tempRatio.toNumber());
+            console.log("amount");
+            console.log(elem.args.amount.toNumber());
+
+        });
+
+
+
+
+        self.setStatus("Shit you did it!");
+      // self.setStatus("Transaction complete!");
+      // self.refreshBalance();
+    }).catch(function(e) {
+      console.log(e);
+      self.setStatus("fucked up; see log.");
+    })
+  },
+
+    getFundValue: function() {
+    let self = this;
+
+    this.setStatus("Initiating transaction... (please wait)");
+
+    let betvote;
+    let Winner;
+    Betvote.deployed().then(function(instance) {
+      betvote = instance;
+      console.log("get Fund value");
+      return betvote.getTotalFund({from:account});
+    }).then(function(res) {
+      console.log("done");
+      self.setStatus("Fund value is here");
+      console.log(res);
+      res.logs.map((elem) => {
+        console.log(elem);
+
+        console.log(elem.args.fundA.toNumber());
+        console.log(elem.args.fundB.toNumber());
+      })
       // self.setStatus("Transaction complete!");
       // self.refreshBalance();
     }).catch(function(e) {
@@ -133,7 +219,7 @@ window.App = {
   },
 
 
-  multipleA : function () {
+    multipleA : function () {
     // let arr = [7429201028298496152, 4985397975494299188]
 
     let arr =[6222291080324946738,
@@ -183,7 +269,7 @@ window.App = {
     }, this)
 
   },
-  multipleB : function () {
+    multipleB : function () {
     // let arr = [7429201028298496152, 4985397975494299188]
 
     let arr = [6763354746415769789,
@@ -233,7 +319,7 @@ window.App = {
     }, this)
 
   },
-  multipleC : function () {
+    multipleC : function () {
     // let arr = [7429201028298496152, 4985397975494299188]
     let arr = [ 2144381363272776548,
       9443040194340703029,
@@ -283,7 +369,7 @@ window.App = {
 
   },
 
-  getEntityA: function() {
+    getEntityA: function() {
     let self = this;
 
     // let amount = parseInt(document.getElementById("amount").value);
@@ -323,7 +409,91 @@ window.App = {
       self.setStatus("shit you got to fix this to get a fk job");
     })
 
-  }
+  },
+
+    getBet: function(betTo) {
+        let self = this;
+        let betAmount;
+
+        // let amount = parseInt(document.getElementById("amount").value);
+        // let receiver = document.getElementById("receiver").value;
+
+        this.setStatus("Initiating transaction... (please wait)");
+
+
+        // turn into number and wei
+        // betAmount = (document.getElementById("betAmount").value);
+
+        betAmount = Math.pow(10,18)*(document.getElementById("betAmount"+betTo).value);
+        console.log(betAmount);
+
+        let betvote;
+        Betvote.deployed().then(function(instance) {
+            betvote = instance;
+            console.log("betvote get bet")
+            // return betvote.getBet(betTo, {from:account}).send({
+            // return betvote.getBet(betTo, {from:account}).send({
+
+            // betvote.get(betTo)
+            // return betvote.getBet(betTo, betAmount, {
+            return betvote.getBet(betTo, betAmount, {
+                from : account,
+                value : betAmount
+            })
+        }).then(function(res) {
+            console.log("betting done");
+            self.setStatus("betting complete");
+            console.log("0");
+            console.log(res);
+            res.logs.map((elem) => {
+                // event newBet(address _to, string _betTo, uint256 amount);
+                console.log(elem.args._to);
+                console.log(elem.args._betTo);
+                console.log(elem.args.amount.toNumber());
+            })
+
+        }).catch(function(e) {
+            console.log(e);
+            self.setStatus("bet fail. fuck..man");
+        })
+
+    },
+    balanceCheck: function() {
+        let self = this;
+        let balanceAddress;
+
+        this.setStatus("Initiating transaction... (please wait)");
+
+
+        balanceAddress = document.getElementById("balanceCheck").value;
+        let betvote;
+        Betvote.deployed().then(function(instance) {
+            betvote = instance;
+            return betvote.checkFundValue(balanceAddress, {
+                from : account,
+            })
+        }).then(function(res) {
+            console.log("result")
+            self.setStatus("betting complete");
+            res.logs.map((elem) => {
+                // console.log(elem.args.balance)
+                // @todo: this!
+                console.log(elem.args.balance.toNumber())
+            })
+
+
+        }).catch(function(e) {
+            console.log(e);
+            self.setStatus("fail. fuck..man");
+        })
+
+    },
+    closeModal: function() {
+      console.log("fuck you")
+
+    }
+
+
 }
 
 

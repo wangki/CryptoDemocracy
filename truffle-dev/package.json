@@ -33,5 +33,9 @@
     "web3": "^0.20.0",
     "webpack": "^2.2.1",
     "webpack-dev-server": "^2.3.0"
+  },
+  "dependencies": {
+    "bower": "^1.8.4",
+    "chart.js": "^2.7.2"
   }
 }

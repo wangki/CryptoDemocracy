@@ -1,29 +1,358 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>MetaCoin - Truffle Webpack Demo w/ Frontend</title>
+  <base href="/app/">
+  <title>Crypto + Democracy - 서울시장 맞추고 이더리움받기</title>
+  <link href='style.css' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-  <script src="./app.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Do+Hyeon|Nanum+Gothic:400,700,800" rel="stylesheet">
+
+
+  <!---->
+
+  <meta charset="utf-8">
+  <script src="../app.js"></script>
+  <script src="http://d3js.org/d3.v3.js"></script>
+  <script src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
+  <script src="https://rawgit.com/tpreusse/radar-chart-d3/master/src/radar-chart.js"></script>
+
+  <script>
+      RadarChart.defaultConfig.color = function() {};
+      RadarChart.defaultConfig.radius = 3;
+      RadarChart.defaultConfig.w = 300;
+      RadarChart.defaultConfig.h = 300;
+      let dataA = [
+        {
+          axes: [
+                  {axis: "정무 경험", value: 10},
+                  {axis: "당내 영향력", value: 8},
+                  {axis: "지지율", value: 5},
+                  {axis: "호감도", value: 5},
+                  {axis: "관등성명 집착도", value: 10}
+              ]
+          }
+      ];
+      let dataB = [
+          {
+              axes: [
+                  {axis: "정무 경험", value: 9},
+                  {axis: "당내 영향력", value: 7},
+                  {axis: "지지율", value: 10},
+                  {axis: "호감도", value: 8},
+                  {axis: "화난 얼굴", value: 10},
+              ]
+          }
+      ];
+      let dataC = [
+          {
+              axes: [
+                  {axis: "정무 경험", value: 6},
+                  {axis: "당내 영향력", value: 10},
+                  {axis: "지지율", value: 7},
+                  {axis: "호감도", value: 8},
+                  {axis: "간보기", value: 10}
+              ]
+          }
+      ];
+
+      let chartA = RadarChart.chart();
+      let cfgA = chartA.config(); // retrieve default config
+
+      let chartB = RadarChart.chart();
+      let cfgB = chartB.config(); // retrieve default config
+
+      let chartC = RadarChart.chart();
+      let cfgC = chartC.config(); // retrieve default config
+
+
+  </script>
+
+  <!---->
+
+
+
+  <style>
+    .modal-display{
+      width: 100vw;
+      height: 100vw;
+      position: absolute;
+      display: flex;
+
+
+    }
+    .modal-background{
+      width: 100%;
+      height: 100%;
+      background: #838D99;
+      z-index:200;
+      opacity:0.7;
+
+    }
+    .modal{
+      width: 40vw;
+      max-width: 800px;
+
+      display: block;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      z-index:200;
+      right:0;
+      margin-left:auto;
+      margin-right:auto;
+      top: 30%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: white;
+      padding: 30px;
+      border-radius: 5%;
+      color: #a0abb7;
+
+
+
+    }
+    .modal h3{
+      text-align: center;
+      justify-content: center;
+
+    }
+
+    .modal .btn{
+
+      padding: 4px 12px 4px;
+      min-width: 150px;
+      max-width: 180px;
+
+
+    }
+
+
+
+    @media (max-width: 550px) {
+      .modal .btn{
+        padding: 2px 12px 2px;
+        min-width: 80px;
+        max-width: 150px;
+
+      }
+
+      .modal{
+        width: 80vw;
+      }
+
+      .modal h3{
+        font-size: 1.2em;
+      }
+
+      .modal-display{
+
+        width: 100vw;
+        height: 300vw;
+
+      }
+
+
+
+    }
+
+
+  </style>
+
+  <script>
+
+      $(".modal-wide").on("show.bs.modal", function() {
+          let height = $(window).height() - 200;
+          $(this).find(".modal-body").css("max-height", height);
+      });
+
+  </script>
+
+
 </head>
 <body>
-  <h1>MetaCoin</h1>
-  <h2>Example Truffle Dapp</h2>
-  <h3>You have <span class="black"><span id="balance"></span> META</span></h3>
+
+  <header>
+
+    <h1>Crypto + Democarcy</h1>
+
+
+
+  </header>
+
+
 
   <br>
-  <h1>Send MetaCoin</h1>
-  <br><label for="amount">Amount:</label><input type="text" id="amount" placeholder="e.g., 95"></input>
-  <br><label for="receiver">To Address:</label><input type="text" id="receiver" placeholder="e.g., 0x93e66d9baea28c17d9fc393b53e3fbdd76899dae"></input>
-  <br><br><button id="send" onclick="App.sendCoin()">Send MetaCoin</button>
-  <br><br><button id="get" onclick="App.getEntityA()">Get Entity A</button>
-  <br><br><button id="test" onclick="App.testBetvote()">test shit</button>
-  <br><br><button id="multipleA" onclick="App.multipleA()">multipleA</button>
-  <br><br><button id="multipleB" onclick="App.multipleB()">multipleB</button>
-  <br><br><button id="multipleC" onclick="App.multipleC()">multipleC</button>
-  <br><br><button id="FundSetter_Test" onclick="App.fundSetterTest()">Set Fund(Testing only)</button>
+  <!--Credit : https://codepen.io/Zeindelf/pen/vZbyEg-->
+  <div class="bg-img">
+      <img class="cover" src="./vote-big.jpg"/>
+    <!--Credit : NASTCO VIA GETTY IMAGES-->
+      <div class="overlay">
+        <h1 class="phrase">민주주의를 블록체인으로 가져오다</h1>
+        <h3>2018 지방선거, 서울 시장을맞추고 이더리움을 가져가세요</h3>
+        <button class="btn btn--stripe">White Paper</button>
+      </div>
+  </div>
+
+
+  <div class="modal-display" id="modal-display" onclick="App.closeModal()">
+    <script>
+        $('body').click(function () {
+            $('#modal-display').hide();
+        });
+
+    </script>
+    <div class="modal-background"></div>
+    <div class="modal">
+      <h3>이 서비스는 이더리움 Rinkeby 네트워크에서 사용할 수 있습니다.</h3>
+      <button class="btn">확인</button>
+    </div>
+  </div>
+
+
+
+  <div class="card-container">
+
+    <div class="card card-park">
+    <img src="./park.jpg" class="card-image">
+    <div class="card-title">
+      <h1>박원순</h1>
+      <h2>최초의 3선 도전</h2>
+    </div>
+    <div class="card-info">
+        <div class="chart-container chartB">
+
+          <script>
+              let selection = d3.select('.chartB');
+              let widthB = selection[0][0].clientWidth;
+
+              let svg = selection.append('svg')
+                  .attr('width', widthB+30)
+                  .attr('height', cfgB.h )
+                  .attr("fill", "#3D4858");
+
+              svg.append('g').classed('single', 1).datum(dataB).call(chartB)
+                  .style("font-weight", "bold");
+              d3.selectAll('text').attr('fill','#1C4D8C');
+          </script>
+
+
+        </div>
+    </div>
+      <br>
+      <div class="constrain">
+        <input id="betAmounta" class="input-elevated input-park" type="text" placeholder="베팅 금액">
+      </div>
+
+      <div class="button-container">
+        <button class="action-button shadow animate button-park" onclick="App.getBet('a')">베팅하기</button>
+      </div>
+
+  </div>
+
+    <div class="card card-ahn">
+      <img src="./ahn.jpg" class="card-image">
+      <div class="card-title">
+        <h1>안철수</h1>
+        <h2>더 이상의 양보는 없다 </h2>
+      </div>
+      <div class="card-info">
+        <div class="chart-container chartC">
+
+            <script>
+                let selectionC = d3.select('.chartC');
+                let widthC = selectionC[0][0].clientWidth;
+
+                let svgC = selectionC.append('svg')
+                    .attr('width', widthC+30)
+                    .attr('height', cfgC.h )
+                    .attr("fill", "#3D4858");
+
+                svgC.append('g').classed('single', 1).datum(dataC).call(chartC)
+                    .style("font-weight", "bold");
+      d3.selectAll('text').attr('fill','#1C4D8C');
+            </script>
+
+        </div>
+
+
+
+      </div>
+      <br>
+        <div class="constrain">
+          <input id="betAmountb" class="input-elevated input-ahn" type="text" placeholder="베팅 금액">
+        </div>
+        <div class="button-container">
+          <button class="action-button shadow animate button-ahn" onclick="App.getBet('b')">베팅하기</button>
+        </div>
+    </div>
+
+
+    <div class="card card-kim">
+      <img src="./kim.png" class="card-image">
+      <div class="card-title">
+        <h1>김문수</h1>
+        <h2>거 서울시장 이름이뭐요?</h2>
+      </div>
+      <div class="card-info">
+        <div class="chart-container chartA">
+          <script>
+              let selectionA = d3.select('.chartA');
+              let width = selectionA[0][0].clientWidth;
+
+              let svgA = selectionA.append('svg')
+                  .attr('width', width+30)
+                  .attr('height', cfgA.h )
+                  .attr("fill", "#3D4858");
+
+
+              svgA.append('g').classed('single', 1).datum(dataA).call(chartA)
+                  .style("font-weight", "bold")
+                  .style("color", "red");
+              d3.selectAll('text').attr('fill','#1C4D8C');
+          </script>
+
+
+        </div>
+
+
+      </div>
+
+      <br>
+      <div class="constrain">
+        <input id="betAmountc" class="input-elevated input-kim" type="text" placeholder="베팅 금액">
+      </div>
+      <div class="button-container">
+        <button class="action-button shadow animate button-kim" onclick="App.getBet('c')">베팅하기</button>
+      </div>
+
+      <br>
+    </div>
+
+  </div>
+
+
+
+
+
+  <!--<br><br><button id="getFundValue" onclick="App.getFundValue()">Get Fund value</button>-->
+  <input type="text" id="winner" placeholder="e.g., a, b">
+  <br><br><button id="Winner-button" onclick="App.setWinner()">Set Winner</button>
+
+
+  <!--<br><br>-->
+  <!--<label for="balanceCheck">which address to check balance:</label><input type="text" id="balanceCheck" placeholder="address">-->
+  <!--<br><br><button id="balanceCheck-button" onclick="App.balanceCheck()">which address?</button>-->
+
   <br><br>
   <span id="status"></span>
   <br>
-  <span class="hint"><strong>Hint:</strong> open the browser developer console to view any errors and warnings.</span>
+  <div class="footer">
+    <h3><a href="https://brunch.co.kr/@bitcoin">Check out my <strong>Blog</strong></a></h3>
+    <h4>Created by WK LEE</h4>
+
+    <a href="mailto:wonkeun6@gmail.com"><strong>wonkeun6@gmail.com</strong></a>
+  </div>
+
 </body>
 </html>
