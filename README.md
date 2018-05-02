@@ -19,18 +19,21 @@ CryptoDemocracy operates on the Ethereum network. A user can bet to the candidat
 
 ## 배분 방식
 1. 유저의 포지션을 변수로 하는 지정된 함수의 결과값을 R(Reward ratio) 이라고 한다.
-  - 유저의 포지션 : x
-  - R = f(x)
-2. 유저의 베팅금액을 A(amount) 라고 한다.
-3. R과 A 값의 곱의 총합을 구한다. ( ΣR*A )
-  - RA = R*A
-  - RA 의 총합 S(Sum) 를 구한다.
+    - 유저의 포지션 : x
+    - `R = f(x)`
+2. 유저의 베팅금액을 `A(amount)` 라고 한다.
+3. R과 A 값의 곱의 총합을 구한다. ( `ΣR*A` )
+    - `RA = R*A`
+    - RA 의 총합 S(Sum) 를 구한다.
 4. 실제 보상은 A와 R의 곱의 총합을 Rebalancing 하여 계산된다.
-  - Fund 는 낙선한 후보에게 베팅된 총 금액으로 분배될 금액이다.
-  - Reward = (RA/S)*Fund
+    - Fund 는 낙선한 후보에게 베팅된 총 금액으로 분배될 금액이다.
+    - `Reward = (RA/S)*Fund`
 
 ## R 을 구하는 식
-R = (1/√x), 위 식은 포지션에 따른 값의 변화가 크게 보이도록 임의로 100 을 곱한 식임.
+
+[](https://github.com/wangki/CryptoDemocracy/blob/master/Chart.png?raw=true)
+
+`R = (1/√x)` 위 식은 포지션에 따른 값의 변화가 크게 보이도록 임의로 100 을 곱한 식임.
 
 
 ## 주의
