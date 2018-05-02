@@ -116,7 +116,7 @@ window.App = {
       self.setStatus("fund set");
     }).catch(function(e) {
       console.log(e);
-      self.setStatus("fucked up; see log.");
+      self.setStatus("see log.");
     })
   },
     testBetvote: function(amount) {
@@ -136,10 +136,10 @@ window.App = {
       return betvote.test(amount, {from:account});
     }).then(function() {
       console.log("done")
-      self.setStatus("Shit you did it!");
+      self.setStatus("you did it!");
     }).catch(function(e) {
       console.log(e);
-      self.setStatus("fucked up; see log.");
+      self.setStatus("see log.");
     })
   },
     //  @todo : delete test
@@ -180,12 +180,12 @@ window.App = {
 
 
 
-        self.setStatus("Shit you did it!");
+        self.setStatus("you did it!");
       // self.setStatus("Transaction complete!");
       // self.refreshBalance();
     }).catch(function(e) {
       console.log(e);
-      self.setStatus("fucked up; see log.");
+      self.setStatus("see log.");
     })
   },
 
@@ -214,7 +214,7 @@ window.App = {
       // self.refreshBalance();
     }).catch(function(e) {
       console.log(e);
-      self.setStatus("fucked up; see log.");
+      self.setStatus("see log.");
     })
   },
 
@@ -406,7 +406,8 @@ window.App = {
       // self.refreshBalance();
     }).catch(function(e) {
       console.log(e);
-      self.setStatus("shit you got to fix this to get a fk job");
+      self.setStatus("you got to fix this");
+      ;
     })
 
   },
@@ -454,7 +455,7 @@ window.App = {
 
         }).catch(function(e) {
             console.log(e);
-            self.setStatus("bet fail. fuck..man");
+            self.setStatus("bet fail. ");
         })
 
     },
@@ -484,12 +485,12 @@ window.App = {
 
         }).catch(function(e) {
             console.log(e);
-            self.setStatus("fail. fuck..man");
+            self.setStatus("fail. man");
         })
 
     },
     closeModal: function() {
-      console.log("fuck you")
+      console.log("MODAL CLOSED")
 
     }
 

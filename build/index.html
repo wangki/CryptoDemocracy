@@ -2,7 +2,7 @@
 <html>
 <head>
   <!--local only-->
-  <base href="/app/">
+  <!--<base href="/app/">-->
   <title>Crypto + Democracy - 서울시장 맞추고 이더리움받기</title>
   <!--<link href='./style.css' rel='stylesheet' type='text/css'>-->
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
@@ -13,7 +13,7 @@
   <!---->
 
   <meta charset="utf-8">
-  <script src="../app.js"></script>
+  <script src="./app.js"></script>
   <script src="https://d3js.org/d3.v3.js"></script>
   <script src="https://code.jquery.com/jquery-1.8.0.min.js"></script>
   <script src="https://rawgit.com/tpreusse/radar-chart-d3/master/src/radar-chart.js"></script>
@@ -74,6 +74,8 @@
 
 
   <style>
+
+
 
     @import url('https://fonts.googleapis.com/css?family=Do+Hyeon|Nanum+Gothic:400,700,800');
 
@@ -812,7 +814,7 @@
               let svg = selection.append('svg')
                   .attr('width', widthB+30)
                   .attr('height', cfgB.h )
-                  .attr("fill", "#3D4858");
+                  .attr("fill", "#2BB7FF");
 
               svg.append('g').classed('single', 1).datum(dataB).call(chartB)
                   .style("font-weight", "bold");
@@ -849,7 +851,7 @@
                 let svgC = selectionC.append('svg')
                     .attr('width', widthC+30)
                     .attr('height', cfgC.h )
-                    .attr("fill", "#3D4858");
+//                    .attr("fill", "#3D4858");
 
                 svgC.append('g').classed('single', 1).datum(dataC).call(chartC)
                     .style("font-weight", "bold");
@@ -883,10 +885,11 @@
               let selectionA = d3.select('.chartA');
               let width = selectionA[0][0].clientWidth;
 
-              let svgA = selectionA.append('svg')
+              let svgA = selectionA.append('svg').classed("polygon-areasA", true)
                   .attr('width', width+30)
-                  .attr('height', cfgA.h )
-                  .attr("fill", "#3D4858");
+                  .attr('height', cfgA.h );
+
+                d3.selectAll('polygon-areasA').attr("fill", "#83ADCF");
 
 
               svgA.append('g').classed('single', 1).datum(dataA).call(chartA)

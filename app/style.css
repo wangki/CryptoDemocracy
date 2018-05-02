@@ -63,25 +63,13 @@ body {
     font-family: "Nanum Gothic" , sans-serif;
     font-weight: 400;
 }
-
-
-
 .cover{
     width: 100%;
     position: relative;
     z-index: -1;
 }
 
-
-
-
 /*BTN*/
-
-
-
-
-
-
 @-webkit-keyframes stripe-slide {
     0% {
         background-position: 0% 0;
@@ -157,8 +145,13 @@ body {
 
 
 
+/*CHART*/
+
+
+
 .radar-chart .area {
     fill-opacity: 0.7;
+    fill : #83ADCF
 }
 .radar-chart.focus .area {
     fill-opacity: 0.3;
@@ -320,7 +313,7 @@ body {
 
 .card-title h2{
     font-family: "BM DoHyeon OTF", Sans-Serif;
-    color: #a0abb7;
+    color: #1A6ECE;
 
 }
 

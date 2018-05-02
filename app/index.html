@@ -66,14 +66,16 @@
       let chartC = RadarChart.chart();
       let cfgC = chartC.config(); // retrieve default config
 
+      $(".modal-wide").on("show.bs.modal", function() {
+          let height = $(window).height() - 200;
+          $(this).find(".modal-body").css("max-height", height);
+      });
+
 
   </script>
-
   <!---->
-
-
-
   <style>
+    @import url('https://fonts.googleapis.com/css?family=Do+Hyeon|Nanum+Gothic:400,700,800');
     .modal-display{
       width: 100vw;
       height: 100vw;
@@ -118,7 +120,6 @@
       justify-content: center;
 
     }
-
     .modal .btn{
 
       padding: 4px 12px 4px;
@@ -127,10 +128,10 @@
 
 
     }
-
-
-
     @media (max-width: 550px) {
+
+
+
       .modal .btn{
         padding: 2px 12px 2px;
         min-width: 80px;
@@ -156,18 +157,510 @@
 
 
     }
+    header h1{
+      font-family: 'Nanum Gothic', sans-serif;
+      font-weight: 800;
+      display: inline-block;
+      vertical-align: middle;
+      margin-top: 10px;
+      margin-bottom: 0;
+      color: #236ba6;
+    }
+    header h2 {
+      font-family: 'Nanum Gothic', sans-serif;
+      font-weight: 800;
+      color: #AAA;
 
+    }
+    body {
+      margin-left: 25%;
+      margin-right: 25%;
+      margin-top: 10%;
+    }
+    .widewrapper {
+      width:100%;
+    }
+    .widewrapper > img {
+      width:100%;
+    }
+    h2 {
+    }
+    h3 {
+      font-weight: normal;
+      color: #AAA;
+      font-size: 24px;
+    }
+    body {
+      word-wrap: break-word;
+      display: -webkit-box;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      flex-direction : column;
+
+      margin: auto;
+      align-items: center;
+      font-family: "Nanum Gothic" , sans-serif;
+      font-weight: 400;
+    }
+    .cover{
+      width: 100%;
+      position: relative;
+      z-index: -1;
+    }
+
+    /*BTN*/
+    @-webkit-keyframes stripe-slide {
+      0% {
+        background-position: 0% 0;
+      }
+      100% {
+        background-position: 100% 0;
+      }
+    }
+    @keyframes stripe-slide {
+      0% {
+        background-position: 0% 0;
+      }
+      100% {
+        background-position: 100% 0;
+      }
+    }
+
+    .btn {
+      min-width: 200px;
+      width: 10%;
+      max-width: 300px;
+      margin: 0 auto;
+
+      overflow: visible;
+      font: inherit;
+      line-height: normal;
+      cursor: pointer;
+      -moz-user-select: text;
+      display: block;
+      text-decoration: none;
+      text-transform: uppercase;
+      padding: 16px 36px 22px;
+      background-color: #fff;
+      color: #666;
+      border: 2px solid #666;
+      border-radius: 6px;
+      margin-bottom: 16px;
+      transition: all .5s ease;
+    }
+    .btn::-moz-focus-inner {
+      padding: 0;
+      border: 0;
+    }
+    .btn--stripe {
+      overflow: hidden;
+      position: relative;
+    }
+    .btn--stripe:after {
+      content: '';
+      display: block;
+      height: 7px;
+      width: 100%;
+      background-image: repeating-linear-gradient(45deg, #666, #666 1px, transparent 2px, transparent 5px);
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      border-top: 1px solid #666;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      background-size: 7px 7px;
+    }
+    .btn--stripe:hover {
+      background-color: #666;
+      color: #fff;
+      border-color: #000;
+    }
+    .btn--stripe:hover:after {
+      background-image: repeating-linear-gradient(45deg, #fff, #fff 1px, transparent 2px, transparent 5px);
+      border-top: 1px solid #000;
+      -webkit-animation: stripe-slide 12s infinite linear forwards;
+      animation: stripe-slide 12s infinite linear forwards;
+    }
+
+
+    /*BTN*/
+
+    /*CHART*/
+    .radar-chart .area {
+      fill-opacity: 0.7;
+      fill : #83ADCF
+    }
+    .radar-chart.focus .area {
+      fill-opacity: 0.3;
+    }
+    .radar-chart.focus .area.focused {
+      fill-opacity: 0.9;
+    }
+    .radar-chart .level {
+      stroke: #FFC914;
+      stroke-width: 0.5;
+    }
+    .radar-chart .axis line {
+      stroke: grey;
+      stroke-width: 1;
+    }
+    .radar-chart .axis .legend {
+      font-family: sans-serif;
+      font-size: 20px;
+
+    }
+    .radar-chart .axis .legend.top {
+      dy:1em;
+    }
+    .radar-chart .axis .legend.left {
+      text-anchor: start;
+    }
+    .radar-chart .axis .legend.middle {
+      text-anchor: middle;
+    }
+    .radar-chart .axis .legend.right {
+      text-anchor: end;
+    }
+    .radar-chart .tooltip {
+      font-family: sans-serif;
+      font-size: 13px;
+      transition: opacity 200ms;
+      opacity: 0;
+    }
+    .radar-chart .tooltip.visible {
+      opacity: 1;
+    }
+    /* area transition when hovering */
+    .radar-chart .area {
+      stroke-width: 2;
+      fill-opacity: 0.5;
+    }
+    .radar-chart.focus .area {
+      fill-opacity: 0.1;
+    }
+    .radar-chart.focus .area.focused {
+      fill-opacity: 0.7;
+    }
+    .radar-chart .circle {
+      fill-opacity: 0.9;
+    }
+    /* transitions */
+    .radar-chart .area, .radar-chart .circle {
+      transition: opacity 300ms, fill-opacity 200ms;
+      opacity: 1;
+    }
+    .radar-chart .d3-enter, .radar-chart .d3-exit {
+      opacity: 0;
+    }
+
+
+
+    /*https://codepen.io/danielburgtorff/pen/OZXOad*/
+    /*https://codepen.io/cssgirl/pen/NGKgrM/*/
+
+
+    .card-container{
+      max-width: 1200px;
+      display: flex;
+      display: -webkit-flex;
+      -webkit-justify-content: center;
+      justify-content: center;
+      -webkit-flex-wrap: wrap;
+      flex-wrap: wrap;
+      align-content: stretch;
+      flex-wrap: wrap;
+
+
+      margin-top: 15px;
+      padding: 1.5%;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+    }
+
+    .card {
+      flex: 30%;
+      min-width: 350px;
+      max-width: 30%;
+      margin: 0 auto;
+      margin-bottom: 15px;
+      font-family: "Nanum Gothic", sans-serif;
+      font-weight: 300;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      border-radius: 1em;
+      overflow: hidden;
+    }
+
+    .card-park{
+      flex: 1;
+
+      order: 1;
+    }
+    .card-ahn{
+      flex: 1;
+
+      order: 2;
+    }
+    .card-kim{
+      flex: 1;
+
+      order: 3;
+    }
+    .card-image {
+      max-width: 100%;
+      height: auto;
+    }
+    .card-title {
+      display: block;
+      position: relative;
+      width: 70%;
+      margin: 0 auto;
+      padding: 0.2em 1em;
+      text-align: center;
+      background-color: white;
+      border-radius: 0.5em;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      transform: translateY(-50%);
+    }
+    .card-title h1 {
+
+    }
+    .card-title h2{
+      font-family: "BM DoHyeon OTF", Sans-Serif;
+      color: #1A6ECE;
+
+    }
+    .card-info {
+      padding: 0 1.5em;
+      margin-bottom: 2em;
+      text-align: center;
+    }
+    .button-container{
+      display: flex;
+      margin: auto;
+      justify-content: center;
+      -webkit-justify-content: center;
+    }
+    canvas{
+    }
+
+    /*https://codepen.io/cheeriottis/pen/inluv*/
+    .animate
+    {
+      transition: all 0.1s;
+      -webkit-transition: all 0.1s;
+    }
+    .action-button
+    {
+      font-family: "Nanum Gothic", sans-serif;
+      font-weight: 400;
+      position: relative;
+      padding: 10px 40px;
+      margin: 0px 10px 10px 0px;
+      border-radius: 10px;
+      font-size: 25px;
+      color: #FFF;
+      text-decoration: none;
+      background-color: #F2CF66;
+      border-bottom: 5px solid #D1B358;
+      text-shadow: 0px -2px #D1B358;
+
+    }
+
+    .action-button:active
+    {
+      transform: translate(0px,5px);
+      -webkit-transform: translate(0px,5px);
+      border-bottom: 1px solid;
+    }
+
+    .chart-container{
+      width: 100%;
+    }
+    h2 {
+      font-weight: 100;
+      font-size: 1.3em;
+    }
+    .bg-img {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background: url('./vote-big.jpg') center center no-repeat;
+      background-size: cover;
+    }
+    .bg-img::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background-image: linear-gradient(to bottom right, #fbfbfb,#a0abb7);
+      opacity: .6;
+    }
+    .overlay{
+      display: block;
+      position: absolute;
+      z-index: 100;
+      right:0;
+      margin-left:auto;
+      margin-right:auto;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .overlay h1{
+      font-family: 'Lato', sans-serif;
+      display: flex;
+      margin-bottom: 30px;
+      text-align: center;
+      justify-content: center;
+      font-weight: 600;
+      color: #586174;
+
+    }
+    .overlay h3{
+      display: flex;
+      margin-bottom: 30px;
+      text-align: center;
+      justify-content: center;
+      color: #3D4858;
+
+    }
+    .input-bet{
+      max-width: 60%;
+    }
+
+
+    /**/
+
+    .constrain{
+      display: flex;
+      max-width: 200px;
+      padding: 0 20px 20px 20px;
+      margin: 0 auto;
+    }
+    .input-elevated{
+      font-size: 16px;
+      line-height: 1.5;
+      border: none;
+      background: #FFFFFF;
+      background-repeat: no-repeat;
+      background-position: 10px 10px;
+      background-size: 20px 20px;
+      box-shadow: 0 2px 4px 0 rgba(0,0,0,0.08);
+      border-radius: 5px;
+      width: 300px;
+      padding: .1em 1em .5em 0.5em;
+      text-align: center;
+    }
+    .input-elevated::placeholder{
+      color: #838D99;
+    }
+    .input-elevated:focus {
+      outline: none;
+      box-shadow: 0 4px 10px 0 rgba(0,0,0,0.16);
+    }
+    .footer{
+      display: inline-block;
+      width: 100%;
+      text-align: center;
+      justify-content: center;
+      -webkit-justify-content: center;
+      background-color: #a0abb7;
+      font-family: "Nanum Gothic", sans-serif;
+      padding-top: 30px;
+      padding-bottom: 30px;
+    }
+
+    h4{
+      color: #fbfbfb;
+    }
+
+    .footer a:link  {
+      text-decoration: none;
+      color: #fbfbfb;
+    }
+    .footer a:visited {
+      text-decoration: none;
+      color: #fbfbfb;
+    }
+    .footer h3 {
+      margin-bottom: 0;
+    }
+
+    #Winner-button, #winner{
+
+      display: none;
+    }
+
+    /**/
+
+
+
+    @media (max-width: 550px) {
+      .overlay{
+
+        width: 60vw;
+
+      }
+
+      .overlay .phrase{
+        display: none;
+      }
+      .overlay h3{
+        font-size: 1.2em;
+      }
+
+      .card-container {
+        display: flex;
+        -webkit-justify-content: center;
+        justify-content: center;
+        align-items: center;
+
+
+        flex-direction: column;
+
+      }
+      .card{
+        display: flex;
+        flex-direction: column;
+
+
+        max-width: 100%;
+        margin-bottom: 10px;
+        -webkit-justify-content: center;
+        justify-content: center;
+        align-items: center;
+
+      }
+
+      .card-park{
+
+        -webkit-justify-content: center;
+        justify-content: center;
+        align-items: center;
+
+      }
+      .card-image {
+
+        -webkit-justify-content: center;
+        justify-content: center;
+        align-items: center;
+        max-width: 100%;
+        height: auto;
+      }
+      .chart-container{
+        width: 85vw;
+      }
+
+
+    }
 
   </style>
 
-  <script>
-
-      $(".modal-wide").on("show.bs.modal", function() {
-          let height = $(window).height() - 200;
-          $(this).find(".modal-body").css("max-height", height);
-      });
-
-  </script>
 
 
 </head>
@@ -301,12 +794,9 @@
               let selectionA = d3.select('.chartA');
               let width = selectionA[0][0].clientWidth;
 
-              let svgA = selectionA.append('svg')
+              let svgA = selectionA.append('svg').classed("polygon-areasC", true)
                   .attr('width', width+30)
-                  .attr('height', cfgA.h )
-                  .attr("fill", "#3D4858");
-
-
+                  .attr('height', cfgA.h );
               svgA.append('g').classed('single', 1).datum(dataA).call(chartA)
                   .style("font-weight", "bold")
                   .style("color", "red");
@@ -349,8 +839,8 @@
   <span id="status"></span>
   <br>
   <div class="footer">
-    <h3><a href="https://brunch.co.kr/@bitcoin">Check out my <strong>Blog</strong></a></h3>
     <h4>Created by WK LEE</h4>
+    <h4><a href="https://brunch.co.kr/@bitcoin">Blog</a></h4>
 
     <a href="mailto:wonkeun6@gmail.com"><strong>wonkeun6@gmail.com</strong></a>
   </div>
