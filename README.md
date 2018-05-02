@@ -31,7 +31,7 @@ CryptoDemocracy operates on the Ethereum network. A user can bet to the candidat
 
 ## R 을 구하는 식
 
-[](https://github.com/wangki/CryptoDemocracy/blob/master/Chart.png?raw=true)
+![Image](https://github.com/wangki/CryptoDemocracy/blob/master/Chart.png?raw=true)
 
 `R = (1/√x)` 위 식은 포지션에 따른 값의 변화가 크게 보이도록 임의로 100 을 곱한 식임.
 
