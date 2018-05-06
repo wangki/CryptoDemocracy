@@ -429,34 +429,40 @@ window.App = {
         console.log(betAmount);
 
         let betvote;
-        Betvote.deployed().then(function(instance) {
-            betvote = instance;
-            console.log("betvote get bet")
-            // return betvote.getBet(betTo, {from:account}).send({
-            // return betvote.getBet(betTo, {from:account}).send({
+        let betString = "getBet(" + betTo +','+ betAmount+  ")";
+        console.log(betString);
 
-            // betvote.get(betTo)
-            // return betvote.getBet(betTo, betAmount, {
-            return betvote.getBet(betTo, betAmount, {
-                from : account,
-                value : betAmount
-            })
-        }).then(function(res) {
-            console.log("betting done");
-            self.setStatus("betting complete");
-            console.log("0");
-            console.log(res);
-            res.logs.map((elem) => {
-                // event newBet(address _to, string _betTo, uint256 amount);
-                console.log(elem.args._to);
-                console.log(elem.args._betTo);
-                console.log(elem.args.amount.toNumber());
-            })
+        // 0xD85a587648E0F12E6603281e8022863266b80a8e.call(bytes4(sha3("getBet( )")),parameters_values)
+        0xD85a587648E0F12E6603281e8022863266b80a8e.call(bytes4(sha3(betString)),parameters_values)
 
-        }).catch(function(e) {
-            console.log(e);
-            self.setStatus("bet fail. ");
-        })
+        // Betvote.deployed().then(function(instance) {
+        //     betvote = instance;
+        //     console.log("betvote get bet")
+        //     // return betvote.getBet(betTo, {from:account}).send({
+        //     // return betvote.getBet(betTo, {from:account}).send({
+        //
+        //     // betvote.get(betTo)
+        //     // return betvote.getBet(betTo, betAmount, {
+        //     return betvote.getBet(betTo, betAmount, {
+        //         from : account,
+        //         value : betAmount
+        //     })
+        // }).then(function(res) {
+        //     console.log("betting done");
+        //     self.setStatus("betting complete");
+        //     console.log("0");
+        //     console.log(res);
+        //     res.logs.map((elem) => {
+        //         // event newBet(address _to, string _betTo, uint256 amount);
+        //         console.log(elem.args._to);
+        //         console.log(elem.args._betTo);
+        //         console.log(elem.args.amount.toNumber());
+        //     })
+
+        // }).catch(function(e) {
+        //     console.log(e);
+        //     self.setStatus("bet fail. ");
+        // })
 
     },
     balanceCheck: function() {
