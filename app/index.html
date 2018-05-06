@@ -147,7 +147,6 @@
       }
 
       .modal-display{
-
         width: 100vw;
         height: 300vw;
 
@@ -236,7 +235,7 @@
     }
 
     .btn {
-      min-width: 200px;
+      min-width: 120px;
       width: 10%;
       max-width: 300px;
       margin: 0 auto;
@@ -297,7 +296,9 @@
     /*CHART*/
     .radar-chart .area {
       fill-opacity: 0.7;
-      fill : #83ADCF
+      z-index: 20;
+      fill : #83ADCF;
+
     }
     .radar-chart.focus .area {
       fill-opacity: 0.3;
@@ -308,29 +309,37 @@
     .radar-chart .level {
       stroke: #FFC914;
       stroke-width: 0.5;
+      z-index: -1;
     }
     .radar-chart .axis line {
+      z-index: 50;
       stroke: grey;
       stroke-width: 1;
     }
     .radar-chart .axis .legend {
+      z-index: 100;
       font-family: sans-serif;
       font-size: 20px;
 
     }
     .radar-chart .axis .legend.top {
+      z-index: 100;
       dy:1em;
     }
     .radar-chart .axis .legend.left {
+      z-index: 100;
       text-anchor: start;
     }
     .radar-chart .axis .legend.middle {
+      z-index: 100;
       text-anchor: middle;
     }
     .radar-chart .axis .legend.right {
+      z-index: 100;
       text-anchor: end;
     }
     .radar-chart .tooltip {
+      z-index: 100;
       font-family: sans-serif;
       font-size: 13px;
       transition: opacity 200ms;
@@ -739,8 +748,8 @@
               let svg = selection.append('svg')
                   .attr('width', widthB+30)
                   .attr('height', cfgB.h )
-                  .attr("fill", "#3D4858");
-
+                  .attr("fill", "#3D4858")
+                  .attr('transform', 'translate(' + (widthB)*0.08 +  ',' + 0 +')');
               svg.append('g').classed('single', 1).datum(dataB).call(chartB)
                   .style("font-weight", "bold");
               d3.selectAll('text').attr('fill','#1C4D8C');
@@ -776,7 +785,8 @@
                 let svgC = selectionC.append('svg')
                     .attr('width', widthC+30)
                     .attr('height', cfgC.h )
-                    .attr("fill", "#3D4858");
+                    .attr("fill", "#3D4858")
+                    .attr('transform', 'translate(' + (widthC)*0.08 +  ',' + 0 +')');
 
                 svgC.append('g').classed('single', 1).datum(dataC).call(chartC)
                     .style("font-weight", "bold");
@@ -812,7 +822,8 @@
 
               let svgA = selectionA.append('svg').classed("polygon-areasC", true)
                   .attr('width', width+30)
-                  .attr('height', cfgA.h );
+                  .attr('height', cfgA.h )
+                  .attr('transform', 'translate(' + (width)*0.08 +  ',' + 0 +')');
               svgA.append('g').classed('single', 1).datum(dataA).call(chartA)
                   .style("font-weight", "bold")
                   .style("color", "red");
