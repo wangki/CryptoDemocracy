@@ -1,4 +1,4 @@
-# CryptoDemocracy
+# [CryptoDemocracy Seoul - Go to website](https://wangki.github.io/CryptoDemocracy/build/index.html)
 
 ## Abstract
 An election can be described as a political festival in the system of Democracy. Despite its importance to the public, people often overlook the importance and decide not to vote. CryptoDemocracy is a service that can transform this political festival into a really fun event by combining the election to gambling. By doing so, We want to encourage people to vote, and them to engage in the politics more.
